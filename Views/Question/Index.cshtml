@@ -1,0 +1,51 @@
+﻿@model IEnumerable<QuizApp.Models.Questions>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Quiz-1</h1>
+@foreach (var item in Model)
+{
+    
+    <form id="quizForm" method="post" asp-action="CheckAnswer">
+       @*  <button type="submit">Submit Answer</button>
+ *@
+        @Html.DisplayFor(modelItem => item.id)
+        <span>.</span>
+        @Html.DisplayFor(modelItem => item.QuestionText)
+        @for (int i = 0; i<=Model.Count(); i++)
+        {
+            <ul>
+                <input type="hidden" name="questionId" value="@item.id" />
+                <input type="hidden" name="questionText" value="@item.QuestionText" />
+                <input type="radio" name="selectedOptionIndex" value="@i" id="@item.id" />
+                <label for="@item.id">@item.Options[i]</label>
+                <input type="hidden" name="options" value="@item.Options[i]" id="@item.Options[i]" />
+
+            </ul>
+            
+            
+
+           
+        }
+
+
+
+
+        <input type="submit" value="Submit" />
+
+@* 
+        <button type="submit">Submit Answer</button> *@
+       @*  <button>@Html.ActionLink("View Answer", "Details", new { id = item.id })</button> *@
+    </form>
+    
+    
+}
+
+
+
+
+
+
+  
